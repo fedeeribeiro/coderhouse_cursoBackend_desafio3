@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "iPhone 12 Pro",
+    "description": "Smartphone de la marca Apple.",
+    "price": 890,
+    "thumbnail": "none",
+    "code": "abcd1234",
+    "stock": 25
+  },
+  {
+    "id": 2,
+    "title": "Lenovo Ideapad 3",
+    "description": "Notebook de la marca Lenovo.",
+    "price": 365,
+    "thumbnail": "none",
+    "code": "a1or9w34",
+    "stock": 47
+  },
+  {
+    "id": 3,
+    "title": "Sony Bravia TV 47\"",
+    "description": "Smart TV de la marca Sony.",
+    "price": 400,
+    "thumbnail": "none",
+    "code": "94doS12q",
+    "stock": 20
+  },
+  {
+    "id": 4,
+    "title": "Mouse Noga",
+    "description": "Mouse inalámbrico de la marca Noga.",
+    "price": 15,
+    "thumbnail": "none",
+    "code": "kf4l2s01",
+    "stock": 38
+  },
+  {
+    "id": 5,
+    "title": "Teclado Redragon",
+    "description": "Teclado mecánico de la marca Redragon.",
+    "price": 50,
+    "thumbnail": "none",
+    "code": "0fdp22S1",
+    "stock": 76
+  },
+  {
+    "id": 6,
+    "title": "Botella térmica",
+    "description": "Botella de 1L adiabática.",
+    "price": 12,
+    "thumbnail": "none",
+    "code": "0fgk82S1",
+    "stock": 34
+  },
+  {
+    "id": 7,
+    "title": "Guitarra Fender Jazzmaster",
+    "description": "Guitarra eléctrica de colores blanco y rojo de la marca Fender.",
+    "price": 1200,
+    "thumbnail": "none",
+    "code": "24mf9r7t",
+    "stock": 15
+  },
+  {
+    "id": 8,
+    "title": "Producto 8",
+    "description": "Producto con id: 8.",
+    "price": 10,
+    "thumbnail": "none",
+    "code": "k2ps39c5",
+    "stock": 20
+  },
+  {
+    "id": 9,
+    "title": "Producto 9",
+    "description": "Producto con id: 9.",
+    "price": 10,
+    "thumbnail": "none",
+    "code": "m4Dfa259",
+    "stock": 20
+  },
+  {
+    "id": 10,
+    "title": "Producto 10",
+    "description": "Producto con id: 10.",
+    "price": 10,
+    "thumbnail": "none",
+    "code": "6Gd20a4F",
+    "stock": 20
+  }
+]
