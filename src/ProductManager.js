@@ -2,12 +2,12 @@ import fs from 'fs';
 
 export default class ProductManager {
     constructor(path){
-        this.path = path
+        this.path = path;
+        if(!fs.existsSync(path)) fs.writeFileSync(path, '[]')
     }
 
     #setId = async () => {
-        const productsFromFile = await fs.promises.readFile(this.path, 'utf-8');
-        const productsArray = JSON.parse(productsFromFile);
+        const productsArray = await this.getProducts();
         if(productsArray.length !== 0){
             let id = 0;
             productsArray.forEach(product => {
@@ -22,16 +22,15 @@ export default class ProductManager {
     }
 
     #isCodeInUse = async (code) => {
-        const productsFromFile = await fs.promises.readFile(this.path, 'utf-8');
-        const productsArray = JSON.parse(productsFromFile);
-        return productsArray.find(product => product.code === code)
+        const productsArray = await this.getProducts();
+        return productsArray.some(product => product.code === code)
     } 
 
     async addProduct(title, description, price, thumbnail, code, stock){
         if(!title || !description || !price || !thumbnail || !code || !stock){
             console.log('Error. No se pueden dejar campos vacíos al agregar un nuevo producto.')
-        // }else if(this.#isCodeInUse(code)){
-        //     console.log('Error. No se pueden ingresar dos productos con el mismo code.')    
+        }else if(this.#isCodeInUse(code)){
+            console.log('Error. No se pueden ingresar dos productos con el mismo code.')    
         }else{
             const product = {
                 id: await this.#setId(),
@@ -42,8 +41,7 @@ export default class ProductManager {
                 code,
                 stock
             }
-            const productsFromFile = await fs.promises.readFile(this.path, 'utf-8');
-            const productsArray = JSON.parse(productsFromFile);
+            const productsArray = await this.getProducts();
             productsArray.push(product);
             await fs.promises.writeFile(this.path, JSON.stringify(productsArray));
             console.log('Se ha agregado el producto exitosamente.')
@@ -51,19 +49,21 @@ export default class ProductManager {
     }
 
     async getProducts(queries){
-        const { limit } = queries;
         const productsFromFile = await fs.promises.readFile(this.path, 'utf-8');
         const productsArray = JSON.parse(productsFromFile);
         if (!productsArray) console.log('Error. Not found.')
         else{
-            if (limit) return productsArray.slice(0, limit)
-            else return productsArray
+            if(queries){
+                const { limit } = queries;
+                return productsArray.slice(0, limit)
+            }else{
+                return productsArray
+            }
         }    
     }
 
     async getProductById(id){
-        const productsFromFile = await fs.promises.readFile(this.path, 'utf-8');
-        const productsArray = JSON.parse(productsFromFile);
+        const productsArray = await this.getProducts();
         const productFound = productsArray.find(product => product.id === id);
         if (!productFound) console.log('Error. Not found.')
         else return productFound
