@@ -11,7 +11,7 @@ export default class ProductManager {
         if(productsArray.length !== 0){
             let id = 0;
             productsArray.forEach(product => {
-                if(product.id > id){
+                if(product.id >= id){
                     id = product.id + 1
                 }
             });
@@ -29,7 +29,7 @@ export default class ProductManager {
     async addProduct(title, description, price, thumbnail, code, stock){
         if(!title || !description || !price || !thumbnail || !code || !stock){
             console.log('Error. No se pueden dejar campos vacíos al agregar un nuevo producto.')
-        }else if(this.#isCodeInUse(code)){
+        }else if(await this.#isCodeInUse(code)){
             console.log('Error. No se pueden ingresar dos productos con el mismo code.')    
         }else{
             const product = {
@@ -70,8 +70,7 @@ export default class ProductManager {
     }
 
     async updateProduct(id, prop, value){
-        const productsFromFile = await fs.promises.readFile(this.path, 'utf-8');
-        const productsArray = JSON.parse(productsFromFile);
+        const productsArray = await this.getProducts();
         const productFound = productsArray.find(product => product.id === id);
         if(productFound){
             if(prop === 'title'){
@@ -102,8 +101,7 @@ export default class ProductManager {
     }
 
     async deleteProduct(id){
-        const productsFromFile = await fs.promises.readFile(this.path, 'utf-8');
-        const productsArray = JSON.parse(productsFromFile);
+        const productsArray = await this.getProducts();
         if(productsArray.find(product => product.id === id)){
             const newProductsArray = productsArray.filter(product => product.id !== id);
             await fs.promises.writeFile(this.path, JSON.stringify(newProductsArray))
